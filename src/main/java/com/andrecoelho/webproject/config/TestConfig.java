@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.andrecoelho.webproject.entities.Category;
 import com.andrecoelho.webproject.entities.Order;
 import com.andrecoelho.webproject.entities.OrderItem;
+import com.andrecoelho.webproject.entities.Payment;
 import com.andrecoelho.webproject.entities.Product;
 import com.andrecoelho.webproject.entities.User;
 import com.andrecoelho.webproject.entities.enums.OrderStatus;
@@ -38,6 +39,7 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
 	
 	public void run(String... args) throws Exception {
 		
@@ -79,6 +81,10 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment pay1 = new Payment(null,Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
 		
 		
 	}
